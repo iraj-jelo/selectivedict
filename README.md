@@ -1,6 +1,6 @@
 ![demo4](https://user-images.githubusercontent.com/1775045/30350902-400cb876-9808-11e7-9d8e-e291f052eff9.png)
 
-# selectivedict fast and comfy dictionary you have ever seen 
+# selectivedict the fastest and comfiest dictionary you have ever seen 
 A firefox add-on which quickly translates words &amp; pharses in pages using google translator. after installing, press `<ctrl>` + `<alt>` + `t`
 to enable (also disable) magic in your browser. 
 

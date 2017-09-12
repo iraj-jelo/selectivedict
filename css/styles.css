@@ -1,0 +1,81 @@
+.trans-type{
+  color: #599bb3;
+  line-height: 3;
+}
+
+.trans-modal{
+ -webkit-user-select: none !important;
+}
+
+.modal-guts {
+
+  /* cover the modal */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 85%;
+
+  /* spacing as needed */
+  padding: 0;
+
+  /* let it scroll */
+  overflow: auto;
+ 
+}
+
+.trans-modal-backdrop{
+ z-index:9999;
+ background: #000;
+ opacity: .5;
+ position: fixed;
+ width:100%;
+ height:100%;
+ top: 0px;
+ left:0px;
+
+}
+
+.trans-table{
+  margin:15px;
+}
+
+.trans-table tr th td tr:nth-child(2n+1) tr:nth-child(2n) {
+    background: #fff !important;
+    border: none !important;
+    padding: 0 !important;
+    color: #777 !important;
+}
+
+.trans-td {
+  color: #111;
+  cursor: pointer;
+  unicode-bidi: inherit;
+  font:normal 14px arial,sans-serif;
+  font-weight: 400;
+  line-height: 15px;
+}
+
+.synonyms-td{
+  color: #777;
+  cursor: pointer;
+  unicode-bidi: inherit;
+  font:normal 13px arial,sans-serif;
+  font-weight: 400;
+  line-height: 15px;
+}
+
+
+.button.-green {
+  color: #FFFFFF;
+  background: #3dd28d;
+}
+
+button {
+  color: #FFFFFF;
+  background: #416dea;
+  padding: 5px;
+  padding-right: 8px;
+  padding-left: 8px;
+}
+

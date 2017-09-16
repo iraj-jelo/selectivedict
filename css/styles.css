@@ -74,7 +74,7 @@
   line-height: 15px;
 }
 
-.button.-green {
+.button-green {
   color: #FFFFFF;
   background: #3dd28d;
 }
@@ -87,3 +87,26 @@ button {
   padding-left: 8px;
 }
 
+button, [type="button"], [type="reset"], [type="submit"], .button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: inline-block;
+    font-family: "Calibre", -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
+    text-align: center;
+    text-decoration: none;
+    -webkit-transition: background-color 250ms ease;
+    transition: background-color 250ms ease;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+
+button:focus, [type="button"]:focus, [type="reset"]:focus, [type="submit"]:focus, .button:focus {
+    outline: 3px solid rgba(2, 145, 153, 0.36) !important;
+    outline-offset: 2px !important;
+}

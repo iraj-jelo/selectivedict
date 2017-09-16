@@ -121,13 +121,14 @@ var create_modal = function(element) {
   d2.appendChild(element);
 
   var close_button = document.createElement('button');
+  close_button.id = 'transCloseButton';  
   close_button.innerText = 'close';
   close_button.style.background = '#416dea';
   close_button.style.border = 'none';
   close_button.style.color = '#fff';
   close_button.style.bottom = '12px';
   close_button.style.position = 'absolute';
-  
+
   var close_modal = function (){
       d.addEventListener('transitionend', function(e){
           e.target.remove();

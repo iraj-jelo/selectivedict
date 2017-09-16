@@ -1,7 +1,118 @@
 // Author: iraj jelodari <iraj.jelo@gmail.com>
 
-var __version__ = '1.0';
+var __version__ = 'v1.1.0';
 var text, sl, tl, enabled;
+
+function log(msg){
+ console.log(msg);
+}
+
+log(__version__);
+
+var language_codes = {'Detect language': 'auto',
+'Afrikaans': 'af', 
+'Albanian': 'sq', 
+'Amharic': 'am', 
+'Arabic': 'ar', 
+'Armenian': 'hy', 
+'Azerbaijani': 'az', 
+'Basque': 'eu', 
+'Belarusian': 'be', 
+'Bengali': 'bn', 
+'Bosnian': 'bs',
+'Bulgarian': 'bg', 
+'Catalan': 'ca', 
+'Cebuano': 'ceb',
+'Chichewa': 'ny', 
+'Chinese': 'zh', 
+'Corsican': 'co', 
+'Croatian': 'hr', 
+'Czech': 'cs', 
+'Danish': 'da', 
+'Dutch': 'nl', 
+'English': 'en', 
+'Esperanto': 'eo',    
+'Estonian': 'et', 
+'Filipino': 'tl', 
+'Finnish': 'fi', 
+'French': 'fr', 
+'Frisian': 'fy', 
+'Galician': 'gl', 
+'Georgian': 'ka', 
+'German': 'de', 
+'Greek': 'el', 
+'Gujarati': 'gu', 
+'Haitian Creole': 'ht', 
+'Hausa': 'ha', 
+'Hawaiian': 'haw', 
+'Hebrew': 'he', 
+'Hindi': 'hi', 
+'Hmong': 'hmn', 
+'Hungarian': 'hu', 
+'Icelandic': 'is', 
+'Igbo': 'ig', 
+'Indonesian': 'id', 
+'Irish': 'ga', 
+'Italian': 'it', 
+'Japanese': 'ja', 
+'Javanese': 'jw',  
+'Kannada': 'kn', 
+'Kazakh': 'kk', 
+'Khmer': 'km', 
+'Korean': 'ko', 
+'Kurdish (Kurmanji)': 'ku', 
+'Kyrgyz': 'ky', 
+'Lao': 'lo', 
+'Latin': 'la', 
+'Latvian': 'lv', 
+'Lithuanian': 'lt', 
+'Luxembourgish': 'lb', 
+'Macedonian': 'mk', 
+'Malagasy': 'mg', 
+'Malay': 'ms', 
+'Malayalam': 'ml', 
+'Maltese': 'mt', 
+'Maori': 'mi', 
+'Marathi': 'mr', 
+'Mongolian': 'mn', 
+'Myanmar (Burmese)': 'my', 
+'Nepali': 'ne', 
+'Norwegian': 'no', 
+'Pashto': 'ps', 
+'Persian': 'fa', 
+'Polish': 'pl', 
+'Portuguese': 'pt', 
+'Punjabi': 'pa', 
+'Romanian': 'ro', 
+'Russian': 'ru', 
+'Samoan': 'sm', 
+'Scots Gaelic': 'gd', 
+'Serbian': 'sr', 
+'Sesotho': 'st', 
+'Shona': 'sn', 
+'Sindhi': 'sd', 
+'Sinhala': 'si', 
+'Slovak': 'sk', 
+'Slovenian': 'sl', 
+'Somali': 'so', 
+'Spanish': 'es', 
+'Sundanese': 'su', 
+'Swahili': 'sw', 
+'Swedish': 'sv', 
+'Tajik': 'tg', 
+'Tamil': 'ta', 
+'Telugu': 'te', 
+'Thai': 'th', 
+'Turkish': 'tr', 
+'Ukrainian': 'uk', 
+'Urdu': 'ur', 
+'Uzbek': 'uz', 
+'Vietnamese': 'vi', 
+'Welsh': 'cy', 
+'Xhosa': 'xh', 
+'Yiddish': 'yi', 
+'Yoruba': 'yo', 
+'Zulu': 'zu'};
 
 var create_translation_tr = function(text, option){
   var option = (option != undefined) ? option : {};
@@ -90,6 +201,7 @@ var create_translations_table = function(a){
 
 
 var create_modal = function(element) {
+  log('open modal');
   var backdrop = document.createElement('div');
   backdrop.className = 'trans-modal-backdrop';
 
@@ -101,8 +213,8 @@ var create_modal = function(element) {
   d.style.position = 'fixed';
   d.style.color = 'rgb(59, 59, 59)';
   d.style.fontSize = '14px';
-  d.style.left = '30%';
-  d.style.right = '30%';
+  d.style.left = '20%';
+  d.style.right = '20%';
   d.style.top = '20%';
   d.style.padding = '15px';
   d.style.fontWeight = 700;
@@ -118,12 +230,60 @@ var create_modal = function(element) {
   d.className = 'trans-modal';
   d2.className = 'modal-guts';
 
+  var source_text_form = document.createElement('form');
+  var translate_button = document.createElement('button');
+  translate_button.innerText = 'Translate';
+  translate_button.style.height = '37px';
+  translate_button.style.margin  = '0px 0px 0px 5px';
+
+  translate_button.addEventListener('click', translateButtonCallback);
+ 
+  var text_input = document.createElement('input');
+  text_input.type = 'text'; 
+  text_input.id = 'sourceTextInput';
+  
+  var source_language_select = document.createElement('select'); 
+  source_language_select.id = 'sourceLanguageSelect';
+
+  var target_language_select = document.createElement('select'); 
+  target_language_select.id = 'targetLanguageSelect';
+
+  source_text_form.appendChild(text_input);
+  var source_language_label = document.createElement('label');
+
+  source_language_label.style.padding = '11px';
+  source_language_label.innerText = 'from';
+  source_text_form.appendChild(source_language_label);
+  source_text_form.appendChild(source_language_select);
+  var target_language_label = document.createElement('lebel');
+  target_language_label.innerText = 'to';
+  target_language_label.style.padding = '11px';
+
+  source_text_form.appendChild(target_language_label);
+  source_text_form.appendChild(target_language_select);
+
+  source_text_form.appendChild(translate_button);
+
+  d.appendChild(source_text_form);
+
+  for (language in language_codes){
+    var source_option = document.createElement('option');
+    source_option.innerText = language;
+    source_option.value = language_codes[language];
+    source_language_select.append(source_option);
+
+    var target_option = document.createElement('option'); 
+    target_option.innerText = language;
+    target_option.value = language_codes[language];
+    target_language_select.append(target_option)
+  }
+
   d2.appendChild(element);
 
   var close_button = document.createElement('button');
   close_button.id = 'transCloseButton';  
   close_button.innerText = 'close';
-  close_button.style.background = '#416dea';
+  close_button.style.background = 'rgb(103, 128, 205)';
   close_button.style.border = 'none';
   close_button.style.color = '#fff';
   close_button.style.bottom = '12px';
@@ -184,7 +344,6 @@ var translate = function(text, sl, tl) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
        var  j = JSON.parse(this.responseText);
-       console.log(j);
        create_modal(create_translations_table(j));
     }
   };
@@ -208,12 +367,22 @@ function restoreOptions() {
 
 }
 
+var translateButtonCallback = function(e){
+    var sl = document.getElementById('sourceLanguageSelect').value;
+    var tl = document.getElementById('targetLanguageSelect').value; 
+    text = window.getElementById('sourceTextInput').value;
+    window.getSelection().removeAllRanges()
+    if (text != ''){
+      translate(text, sl, tl);
+    }
+}
+
 var mouseUpEvevntCallback = function(e){
     restoreOptions();
     text = window.getSelection().toString();
     window.getSelection().removeAllRanges()
     if (text != ''){
-      translate(text, sl, tl);;
+      translate(text, sl, tl);
     }
 }
 

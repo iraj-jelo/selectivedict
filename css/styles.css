@@ -11,10 +11,10 @@
 
   /* cover the modal */
   position: absolute;
-  top: 0;
+  top: 57px;
   left: 0;
   width: 100%;
-  height: 85%;
+  height: 75%;
 
   /* spacing as needed */
   padding: 0;
@@ -90,7 +90,6 @@ button {
 button, [type="button"], [type="reset"], [type="submit"], .button {
     -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;
     display: inline-block;
     font-family: "Calibre", -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
     text-align: center;
@@ -100,13 +99,53 @@ button, [type="button"], [type="reset"], [type="submit"], .button {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
     vertical-align: middle;
     white-space: nowrap;
 }
-
 
 button:focus, [type="button"]:focus, [type="reset"]:focus, [type="submit"]:focus, .button:focus {
     outline: 3px solid rgba(2, 145, 153, 0.36) !important;
     outline-offset: 2px !important;
 }
+
+form {
+  padding: 3px;
+  display: flex;
+}
+
+input{
+  padding: 3px;
+  display: inline;
+  padding: 4px;
+  border: none;
+  color: #393835;
+  background: #e7efef;
+  font-size: 14px;
+  border-radius: 0px;
+  width: 100px;
+  flex: 2;
+  height: 37px;
+  margin: 0;
+}
+
+input:focus, select:focus {
+  border-color: #188fff;
+}
+
+select {
+  padding: 3px;
+  display: inline;
+  padding: 4px;
+  background: #e7efef;
+  border: none !important;
+  color: #393835;
+  font-size: 14px;
+  -webkit-flex: 1;
+  flex: 1;
+  height: 37px;
+}
+
+input, select{
+  box-sizing: border-box;
+}
+

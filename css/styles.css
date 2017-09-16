@@ -37,24 +37,28 @@
 }
 
 .trans-table{
-  margin:15px;
-  width: 100%;
-  border: none;
-  border-spacing: 0;
-  border-collapse: collapse;
-  table-layout: fixed;
+  margin: 15px !important;
+  border: none !important;
+  table-layout: fixed !important;
+  width: auto !important;
 }
 
 .trans-table tr th td tr:nth-child(2n+1) tr:nth-child(2n) {
-    background: #fff !important;
-    border: none !important;
-    padding: 0 !important;
-    color: #777 !important;
+  background: #fff !important;
+  border: none !important;
+  padding: 0 !important;
+  color: #777 !important;
+}
+
+.trans-table tr, td, th {
+  border: none;
+  padding: 0px !important;
+  vertical-align: middle;
+  background: #fff !important;
 }
 
 .trans-td {
   color: #111;
-  cursor: pointer;
   unicode-bidi: inherit;
   font:normal 14px arial,sans-serif;
   font-weight: 400;
@@ -69,7 +73,6 @@
   font-weight: 400;
   line-height: 15px;
 }
-
 
 .button.-green {
   color: #FFFFFF;

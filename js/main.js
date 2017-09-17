@@ -114,6 +114,16 @@ var language_codes = {'Detect language': 'auto',
 'Yoruba': 'yo', 
 'Zulu': 'zu'};
 
+var request = function(text, sl, tl, callback) {
+  var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl='+sl+'&tl='+tl+'&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&source=btn&ssel=3&tsel=6&kc=5&q='+text;
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = callback;
+  xhttp.open("GET", url, false);
+  return xhttp
+}
+
+
 var create_translation_tr = function(text, option){
   var option = (option != undefined) ? option : {};
   var tr = document.createElement('tr');
@@ -230,13 +240,12 @@ var create_modal = function(element) {
   d.className = 'trans-modal';
   d2.className = 'modal-guts';
 
-  var source_text_form = document.createElement('form');
+  var source_text_form = document.createElement('div');
+  source_text_form.style.display = 'flex';
   var translate_button = document.createElement('button');
   translate_button.innerText = 'Translate';
   translate_button.style.height = '37px';
   translate_button.style.margin  = '0px 0px 0px 5px';
-
-  translate_button.addEventListener('click', translateButtonCallback);
  
   var text_input = document.createElement('input');
   text_input.type = 'text'; 
@@ -263,6 +272,32 @@ var create_modal = function(element) {
   source_text_form.appendChild(target_language_select);
 
   source_text_form.appendChild(translate_button);
+
+  var translateButtonCallback = function(e){
+
+      var sl = source_language_select.value;
+      var tl = target_language_select.value; 
+      text = text_input.value;
+
+      if (text.trim() == ''){
+        return
+      }
+
+      var xhttp = request(text, sl, tl, function() {
+        if (this.readyState == 4 && this.status == 200) {
+
+           var  j = JSON.parse(this.responseText);
+           element = create_translations_table(j);
+           d2.firstChild.remove();
+           d2.appendChild(element);
+
+        }
+      });
+
+      xhttp.send();
+  }
+
+  translate_button.addEventListener('click', translateButtonCallback);
 
   d.appendChild(source_text_form);
 
@@ -337,17 +372,12 @@ var create_modal = function(element) {
 }
 
 var translate = function(text, sl, tl) {
-  var source_language = (source_language == undefined)? true : false;
-  var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl='+sl+'&tl='+tl+'&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&source=btn&ssel=3&tsel=6&kc=5&q='+text;
-
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
+  var xhttp = request(text, sl, tl, function() {
     if (this.readyState == 4 && this.status == 200) {
        var  j = JSON.parse(this.responseText);
        create_modal(create_translations_table(j));
     }
-  };
-  xhttp.open("GET", url, false);
+  });
   xhttp.send();
 }
 
@@ -365,16 +395,6 @@ function restoreOptions() {
   var getting = browser.storage.local.get(["translateFrom", "translateTo"]);
   getting.then(setCurrentChoice, onError);
 
-}
-
-var translateButtonCallback = function(e){
-    var sl = document.getElementById('sourceLanguageSelect').value;
-    var tl = document.getElementById('targetLanguageSelect').value; 
-    text = window.getElementById('sourceTextInput').value;
-    window.getSelection().removeAllRanges()
-    if (text != ''){
-      translate(text, sl, tl);
-    }
 }
 
 var mouseUpEvevntCallback = function(e){

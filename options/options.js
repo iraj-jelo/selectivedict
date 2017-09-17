@@ -135,7 +135,6 @@ function saveOptions(e) {
 function restoreOptions() {
 
   function setCurrentChoice(result) {
-    console.log(result);
     var source_selected_index = (result.translateFromSelect == undefined)? "21" : result.translateFromSelect[1] // 21 is selected index of English language in select options
     var target_selected_index = (result.translateToSelect == undefined)? "70" : result.translateToSelect[1] // 70 is selected index of Persian language in select options
 

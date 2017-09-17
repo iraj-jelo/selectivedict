@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "SelectiveDict",
-  "version": "1.0",
+  "version": "1.1.0",
   "author": "itaj jelodari <iraj.jelo@gmail.com>",
   "description": "a dictionary that enables you to translate selected texts on the web pages with only one click by google translator. please see the github page to contribute",
   "homepage_url": "https://github.com/iraj-jelo/selectivedict",

@@ -246,7 +246,7 @@ var create_modal = function(element) {
   var translate_button = document.createElement('button');
   translate_button.innerText = 'Translate';
   translate_button.style.height = '37px';
-  translate_button.style.margin  = '0px 0px 0px 5px';
+  translate_button.style.margin  = '0px 0px 0px 10px';
  
   var text_input = document.createElement('input');
   text_input.type = 'text'; 

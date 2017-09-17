@@ -3,11 +3,11 @@
 var __version__ = 'v1.1.0';
 var text, sl, tl, enabled;
 
-function log(msg){
- console.log(msg);
-}
+var default_source_language = "en";
+var default_target_language = "fa";
 
-log(`Addon SelectiveDict ${__version__}`);
+var default_source_selected_index = "21";
+var default_target_selected_index = "70";
 
 var language_codes = {'Detect language': 'auto',
 'Afrikaans': 'af', 
@@ -114,12 +114,17 @@ var language_codes = {'Detect language': 'auto',
 'Yoruba': 'yo', 
 'Zulu': 'zu'};
 
+function log(msg){
+  console.log(msg);
+}
+
 var request = function(text, sl, tl, callback) {
   var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl='+sl+'&tl='+tl+'&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&source=btn&ssel=3&tsel=6&kc=5&q='+text;
-
   var xhttp = new XMLHttpRequest();
+
   xhttp.onreadystatechange = callback;
   xhttp.open("GET", url, false);
+
   return xhttp
 }
 
@@ -174,7 +179,6 @@ var create_translations_table = function(a){
     tbody.appendChild(type_tr);
     
     for (var jndex  in translations_array ){
-      //console.log(translations_array[jndex]);
       var translation_array = translations_array[jndex];
       var translation = translation_array[0];    
       var dist_sysnonyms_array = translation_array[1];
@@ -201,7 +205,6 @@ var create_translations_table = function(a){
 
       tr.appendChild(td2);
       tbody.appendChild(tr);
-      //console.log(translation, ':', dist_sysnonyms);  
     }  
   }
   table.appendChild(tbody);
@@ -273,12 +276,12 @@ var create_modal = function(element) {
   source_text_form.appendChild(translate_button);
 
   function saveOptions() {
-    var sl_selected_index = source_language_select.selectedIndex;
-    var tl_selected_index = target_language_select.selectedIndex;
+    var sl_select = [source_language_select.selectedOptions[0].innerHTML, source_language_select.selectedIndex];
+    var tl_select = [target_language_select.selectedOptions[0].innerHTML, target_language_select.selectedIndex];
 
     browser.storage.local.set({
-      translateFromSelectedIndex: sl_selected_index,
-      translateToSelectedIndex: tl_selected_index
+      translateFromSelect: sl_select,
+      translateToSelect: tl_select
     });
 
   }
@@ -286,15 +289,18 @@ var create_modal = function(element) {
   function restoreOptions() {
 
     function setCurrentChoice(result) {
-      source_language_select.selectedIndex = result.translateFromSelectedIndex || "21"; // 21 is selected index of English language in select options
-      target_language_select.selectedIndex = result.translateToSelectedIndex || "70"; // 70 is selected index of Persian language in select options
+      var source_selected_index = (result.translateFromSelect == undefined)? default_source_selected_index : result.translateFromSelect[1] // 21 is selected index of English language in select options
+      var target_selected_index = (result.translateToSelect == undefined)? default_target_selected_index : result.translateToSelect[1] // 70 is selected index of Persian language in select options
+
+      source_language_select.selectedIndex = source_selected_index; 
+      target_language_select.selectedIndex = target_selected_index;
   }
 
     function onError(error) {
       console.log(`Error: ${error}`);
     }
 
-    var getting = browser.storage.local.get(["translateFromSelectedIndex", "translateToSelectedIndex"]);
+    var getting = browser.storage.local.get(["translateFromSelect", "translateToSelect"]);
     getting.then(setCurrentChoice, onError);
 
   }
@@ -419,15 +425,19 @@ var translate = function(text, sl, tl) {
 function restoreOptions() {
 
   function setCurrentChoice(result) {
-    sl = result.translateFrom || "en";
-    tl = result.translateTo || "fa";
+
+    var source_selected_index = (result.translateFromSelect == undefined)? default_source_language : language_codes[result.translateFromSelect[0]]; 
+    var target_selected_index = (result.translateToSelect == undefined)? default_target_language : language_codes[result.translateToSelect[0]]; 
+
+    sl = source_selected_index; 
+    tl = target_selected_index;
   }
 
   function onError(error) {
     console.log(`Error: ${error}`);
   }
 
-  var getting = browser.storage.local.get(["translateFrom", "translateTo"]);
+  var getting = browser.storage.local.get(["translateFromSelect", "translateToSelect"]);
   getting.then(setCurrentChoice, onError);
 
 }

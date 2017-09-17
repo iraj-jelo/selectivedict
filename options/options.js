@@ -104,6 +104,9 @@ var language_codes = {'Detect language': 'auto',
 'Yoruba': 'yo', 
 'Zulu': 'zu'};
 
+var source_select = document.querySelector("#sourceLanguageSelect");
+var target_select = document.querySelector("#targetLanguageSelect");
+
 for (language in language_codes){
   var source_option = document.createElement('option');
   source_option.innerText = language;
@@ -118,12 +121,13 @@ for (language in language_codes){
 
 function saveOptions(e) {
   e.preventDefault();
-  var sl_selected_index = document.querySelector("#sourceLanguageSelect").selectedIndex;
-  var tl_selected_index = document.querySelector("#targetLanguageSelect").selectedIndex;
+
+  var sl_selected = [source_select.selectedOptions[0].innerHTML, source_select.selectedIndex];
+  var tl_selected = [target_select.selectedOptions[0].innerHTML, target_select.selectedIndex];
   
   browser.storage.local.set({
-    translateFromSelectedIndex: sl_selected_index,
-    translateToSelectedIndex: tl_selected_index
+    translateFromSelect: sl_selected,
+    translateToSelect: tl_selected
   });
   alert("successfully saved.");
 }
@@ -131,15 +135,19 @@ function saveOptions(e) {
 function restoreOptions() {
 
   function setCurrentChoice(result) {
-    document.querySelector("#sourceLanguageSelect").selectedIndex = result.translateFromSelectedIndex || "21"; // 21 is selected index of English language in select options
-    document.querySelector("#targetLanguageSelect").selectedIndex = result.translateToSelectedIndex || "70"; // 70 is selected index of Persian language in select options
+    console.log(result);
+    var source_selected_index = (result.translateFromSelect == undefined)? "21" : result.translateFromSelect[1] // 21 is selected index of English language in select options
+    var target_selected_index = (result.translateToSelect == undefined)? "70" : result.translateToSelect[1] // 70 is selected index of Persian language in select options
+
+    source_select.selectedIndex = source_selected_index; 
+    target_select.selectedIndex = target_selected_index;
   }
 
   function onError(error) {
     console.log(`Error: ${error}`);
   }
 
-  var getting = browser.storage.local.get(["translateFromSelectedIndex", "translateToSelectedIndex"]);
+  var getting = browser.storage.local.get(["translateFromSelect", "translateToSelect"]);
   getting.then(setCurrentChoice, onError);
 
 }

@@ -8,20 +8,16 @@
 }
 
 .modal-guts {
-
   /* cover the modal */
   position: absolute;
   top: 57px;
   left: 0;
   width: 100%;
   height: 75%;
-
   /* spacing as needed */
   padding: 0;
-
   /* let it scroll */
   overflow: auto;
- 
 }
 
 .trans-modal-backdrop{
@@ -33,7 +29,6 @@
   height:100%;
   top: 0px;
   left:0px;
-
 }
 
 .trans-table{

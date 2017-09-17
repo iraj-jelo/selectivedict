@@ -250,6 +250,7 @@ var create_modal = function(element) {
   var text_input = document.createElement('input');
   text_input.type = 'text'; 
   text_input.id = 'sourceTextInput';
+  text_input.value = text;
   
   var source_language_select = document.createElement('select'); 
   source_language_select.id = 'sourceLanguageSelect';
@@ -304,20 +305,17 @@ var create_modal = function(element) {
   restoreOptions();
 
   var translateButtonCallback = function(e){
-      log(1);
       saveOptions();
-      log('1a');
       var sl = source_language_select.value;
       var tl = target_language_select.value; 
       text = text_input.value;
-      log(2);
 
       if (text.trim() == ''){
         return
       }
 
       var xhttp = request(text, sl, tl, function() {
-        log(3);
+
         if (this.readyState == 4 && this.status == 200) {
            var  j = JSON.parse(this.responseText);
            element = create_translations_table(j);

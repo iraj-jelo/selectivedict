@@ -38,6 +38,7 @@
 
 .trans-table{
   margin: 15px !important;
+  margin-top: 0px !important;
   border: none !important;
   table-layout: fixed !important;
   width: auto !important;

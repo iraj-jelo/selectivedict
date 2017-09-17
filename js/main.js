@@ -7,7 +7,7 @@ function log(msg){
  console.log(msg);
 }
 
-log(__version__);
+log(`Addon SelectiveDict ${__version__}`);
 
 var language_codes = {'Detect language': 'auto',
 'Afrikaans': 'af', 
@@ -123,7 +123,6 @@ var request = function(text, sl, tl, callback) {
   return xhttp
 }
 
-
 var create_translation_tr = function(text, option){
   var option = (option != undefined) ? option : {};
   var tr = document.createElement('tr');
@@ -211,7 +210,6 @@ var create_translations_table = function(a){
 
 
 var create_modal = function(element) {
-  log('open modal');
   var backdrop = document.createElement('div');
   backdrop.className = 'trans-modal-backdrop';
 
@@ -288,7 +286,6 @@ var create_modal = function(element) {
   function restoreOptions() {
 
     function setCurrentChoice(result) {
-      console.log(result.translateFrom, result.translateFrom);
       source_language_select.selectedIndex = result.translateFromSelectedIndex || "21"; // 21 is selected index of English language in select options
       target_language_select.selectedIndex = result.translateToSelectedIndex || "70"; // 70 is selected index of Persian language in select options
   }
@@ -407,6 +404,13 @@ var translate = function(text, sl, tl) {
     if (this.readyState == 4 && this.status == 200) {
        var  j = JSON.parse(this.responseText);
        create_modal(create_translations_table(j));
+    }
+    if (this.readyState == 4 && this.status == 0) {
+       var note = document.createElement('p');
+       note.innerText = 'Connection error.';
+       note.style.margin = '15px';
+       note.style.color = 'red';
+       create_modal(note);
     }
   });
   xhttp.send();

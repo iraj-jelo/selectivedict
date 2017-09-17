@@ -273,19 +273,52 @@ var create_modal = function(element) {
 
   source_text_form.appendChild(translate_button);
 
-  var translateButtonCallback = function(e){
+  function saveOptions() {
+    var sl_selected_index = source_language_select.selectedIndex;
+    var tl_selected_index = target_language_select.selectedIndex;
 
+    browser.storage.local.set({
+      translateFromSelectedIndex: sl_selected_index,
+      translateToSelectedIndex: tl_selected_index
+    });
+
+  }
+
+  function restoreOptions() {
+
+    function setCurrentChoice(result) {
+      console.log(result.translateFrom, result.translateFrom);
+      source_language_select.selectedIndex = result.translateFromSelectedIndex || "21"; // 21 is selected index of English language in select options
+      target_language_select.selectedIndex = result.translateToSelectedIndex || "70"; // 70 is selected index of Persian language in select options
+  }
+
+    function onError(error) {
+      console.log(`Error: ${error}`);
+    }
+
+    var getting = browser.storage.local.get(["translateFromSelectedIndex", "translateToSelectedIndex"]);
+    getting.then(setCurrentChoice, onError);
+
+  }
+  
+  restoreOptions();
+
+  var translateButtonCallback = function(e){
+      log(1);
+      saveOptions();
+      log('1a');
       var sl = source_language_select.value;
       var tl = target_language_select.value; 
       text = text_input.value;
+      log(2);
 
       if (text.trim() == ''){
         return
       }
 
       var xhttp = request(text, sl, tl, function() {
+        log(3);
         if (this.readyState == 4 && this.status == 200) {
-
            var  j = JSON.parse(this.responseText);
            element = create_translations_table(j);
            d2.firstChild.remove();

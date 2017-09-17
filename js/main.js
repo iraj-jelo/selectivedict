@@ -354,7 +354,7 @@ var create_modal = function(element) {
 
   var close_modal = function (){
       d.addEventListener('transitionend', function(e){
-          e.target.remove();
+          d.remove();
           backdrop.remove();
       }, false);
 
@@ -368,7 +368,7 @@ var create_modal = function(element) {
   }
 
   close_button.addEventListener('click', close_modal_callback);
-  //backdrop.addEventListener('click', close_modal_callback);
+  backdrop.addEventListener('click', close_modal_callback);
  
  document.onkeydown = function(evt) {
       evt = evt || window.event;

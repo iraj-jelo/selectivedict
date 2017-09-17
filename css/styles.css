@@ -25,14 +25,14 @@
 }
 
 .trans-modal-backdrop{
- z-index:9999;
- background: #000;
- opacity: .5;
- position: fixed;
- width:100%;
- height:100%;
- top: 0px;
- left:0px;
+  z-index:9999;
+  background: #000;
+  opacity: .5;
+  position: fixed;
+  width:100%;
+  height:100%;
+  top: 0px;
+  left:0px;
 
 }
 
@@ -81,47 +81,48 @@
   background: #3dd28d;
 }
 
-button {
+#SelectiveDictModal {
+  font: normal 13px arial,sans-serif;
+}
+
+#SelectiveDictModal button {
   color: #FFFFFF;
   background: #416dea;
   padding: 5px;
   padding-right: 8px;
   padding-left: 8px;
+  border: none !important;
 }
 
-button, [type="button"], [type="reset"], [type="submit"], .button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    display: inline-block;
-    font-family: "Calibre", -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
-    text-align: center;
-    text-decoration: none;
-    -webkit-transition: background-color 250ms ease;
-    transition: background-color 250ms ease;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    vertical-align: middle;
-    white-space: nowrap;
+#SelectiveDictModal button, [type="button"], [type="reset"], [type="submit"], .button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: inline-block;
+  font-family: "Calibre", -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
+  -webkit-transition: background-color 250ms ease;
+  transition: background-color 250ms ease;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
 }
 
-button:focus, [type="button"]:focus, [type="reset"]:focus, [type="submit"]:focus, .button:focus {
-    outline: 3px solid rgba(2, 145, 153, 0.36) !important;
-    outline-offset: 2px !important;
+#SelectiveDictModal button:focus, [type="button"]:focus, [type="reset"]:focus, [type="submit"]:focus, .button:focus {
+  outline: 3px solid rgba(2, 145, 153, 0.36) !important;
+  outline-offset: 2px !important;
 }
 
-form {
-  padding: 3px;
-  display: flex;
-}
-
-input{
+#SelectiveDictModal input{
   padding: 3px;
   display: inline;
   padding: 4px;
-  border: none;
+  border: none !important;
   color: #393835;
-  background: #e7efef;
+  background: #e7efef !important;
   font-size: 14px;
   border-radius: 0px;
   width: 100px;
@@ -130,11 +131,11 @@ input{
   margin: 0;
 }
 
-input:focus, select:focus {
+#SelectiveDictModal input:focus, select:focus {
   border-color: #188fff;
 }
 
-select {
+#SelectiveDictModal select {
   padding: 3px;
   display: inline;
   padding: 4px;
@@ -147,7 +148,7 @@ select {
   height: 37px;
 }
 
-input, select{
+#SelectiveDictModal input, select{
   box-sizing: border-box;
 }
 

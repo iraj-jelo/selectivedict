@@ -185,6 +185,8 @@
   padding:8px 0 4px 0;
   position:relative;
   zoom:1
+  opacity: 0.55;
+  -moz-opacity: 0.55;
 }
 
 #SelectiveDictModal .listen-button {
@@ -224,6 +226,8 @@
   -webkit-box-shadow:0 1px 1px rgba(0,0,0,.1);
   -moz-box-shadow:0 1px 1px rgba(0,0,0,.1);
   box-shadow:0 1px 1px rgba(0,0,0,.1);
+  opacity: 1;
+  -moz-opacity: 1;
 }
 
 #SelectiveDictModal .listen-button:active {
@@ -258,3 +262,4 @@
   color: #000;
   text-decoration: underline;
 }
+

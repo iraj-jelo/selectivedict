@@ -162,6 +162,7 @@ var create_translation_tr = function(text, option){
 var create_translations_table = function(a){
   var table = document.createElement('table');
   table.className = 'trans-table'; 
+  table.id = 'trans-table'; 
   var tbody = document.createElement('tbody');
   var translation_array = a[0][0];
   var source_text = a[0][0][1];
@@ -256,7 +257,30 @@ var create_translations_table = function(a){
       tbody.appendChild(tr);
     }  
   }
+
   table.appendChild(tbody);
+
+  table.addEventListener('click', function (event) {
+    if (event.target.tagName == "SPAN") {
+      var sl = document.getElementById('sourceLanguageSelect').value;
+      var tl = document.getElementById('targetLanguageSelect').value; 
+      text = event.target.textContent;
+     
+      if (text.trim() == ''){return}
+
+      var xhttp = request(text, sl, tl, function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var  j = JSON.parse(this.responseText);
+          element = create_translations_table(j);
+          table.replaceWith(element);
+          document.getElementById('sourceTextInput').value = text;
+        }
+      });
+
+      xhttp.send();
+    }
+  }, false);
+
   return table
 }
 

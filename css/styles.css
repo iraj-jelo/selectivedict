@@ -1,3 +1,8 @@
+.phonetic-td{
+  color: #599bb3;
+  line-height: 2;
+}
+
 .trans-type{
   color: #599bb3;
   line-height: 3;
@@ -53,7 +58,7 @@
   background: #fff !important;
 }
 
-.trans-td {
+.trans-td, .translation-td {
   color: #111;
   unicode-bidi: inherit;
   font:normal 14px arial,sans-serif;
@@ -61,7 +66,7 @@
   line-height: 15px;
 }
 
-.synonyms-td{
+.synonyms-td, .source-text-td{
   color: #777;
   cursor: pointer;
   unicode-bidi: inherit;

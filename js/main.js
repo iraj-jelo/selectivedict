@@ -2,7 +2,6 @@
 
 var __version__ = 'v1.1.0';
 var text, sl, tl, enabled;
-var body_class_name = document.body.className;
 var default_source_language = "en";
 var default_target_language = "fa";
 
@@ -149,25 +148,40 @@ var create_translations_table = function(a){
   var table = document.createElement('table');
   table.className = 'trans-table'; 
   var tbody = document.createElement('tbody');
+  var translation_array = a[0][0];
+  var phonetic_array = a[0][1];
   var translation_types_array = a[1]; 
+  
+  if (phonetic_array != undefined) {
+    var phonetic = phonetic_array[3];
+    var tr = document.createElement('tr');
+    var td1 = document.createElement('td');
+    var td2 = document.createElement('td');
 
-  if (translation_types_array == undefined) { 
-    var translates_array = a[0];
-    var translate_array = translates_array[0];
-      var tr = document.createElement('tr');
-      var td1 = document.createElement('td');
-      var td2 = document.createElement('td');
+    td1.className = 'phonetic-td';       
+    td2.className = '';
 
-      td1.className = 'trans-td';       
-      td2.className = 'synonyms-td';
+    td1.innerText = phonetic ;
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tbody.appendChild(tr);
+  }
 
-      td1.innerText = translate_array[0];
-      td2.innerText = translate_array[1];
-      tr.appendChild(td1);
-      tr.appendChild(td2);
-      tbody.appendChild(tr);
-      table.appendChild(tbody);
-    return table
+  if (translation_array != undefined) {
+    var translation = translation_array[0];
+    var tr = document.createElement('tr');
+    var td1 = document.createElement('td');
+    var td2 = document.createElement('td');
+
+    td1.className = 'translation-td';       
+    td2.className = 'source-text-td';
+
+    td1.innerText = translation ;
+    td2.innerText = translation_array[1] ;
+
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tbody.appendChild(tr);
   }
 
   for (var index in translation_types_array) {
@@ -456,12 +470,12 @@ document.addEventListener('keyup', function(e) {
     // <alt> + <ctrl> + <doubleclick>
     if (enabled){
       enabled = false;
-      document.body.className = body_class_name;
+      document.body.className = document.body.className.replace(new RegExp('help-cursor', 'g'), '').trim();
       document.body.removeEventListener('mouseup', mouseUpEvevntCallback);
       window.getSelection().removeAllRanges();
     } else {
       enabled = true;
-      document.body.className = (body_class_name != '')?  body_class_name + ' ' + 'help-cursor' : 'help-cursor';
+      document.body.className = (document.body.className != '')?  document.body.className + ' ' + 'help-cursor' : 'help-cursor';
       document.body.addEventListener('mouseup', mouseUpEvevntCallback);
       window.getSelection().removeAllRanges();
     }

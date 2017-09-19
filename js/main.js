@@ -1,6 +1,6 @@
 // Author: iraj jelodari <iraj.jelo@gmail.com>
 
-var __version__ = 'v1.1.0';
+var __version__ = 'v1.2.0';
 var text, sl, tl, enabled;
 var default_source_language = "en";
 var default_target_language = "fa";

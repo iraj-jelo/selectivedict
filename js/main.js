@@ -117,6 +117,8 @@ function log(msg){
   console.log(msg);
 }
 
+document.body.className = document.body.className.replace(new RegExp('help-cursor', 'g'), '').trim();
+
 var request = function(text, sl, tl, callback) {
   var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl='+sl+'&tl='+tl+'&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&source=btn&ssel=3&tsel=6&kc=5&q='+text;
   var xhttp = new XMLHttpRequest();
@@ -125,6 +127,19 @@ var request = function(text, sl, tl, callback) {
   xhttp.open("GET", url, false);
 
   return xhttp
+}
+
+
+var playSound = function(text, tl) {
+  var url = 'http://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=32&client=gtx&q=' + text + '&tl=' + tl;
+  var audio = document.createElement('audio');
+  audio.style.display = "none";
+  audio.src = url;
+  audio.autoplay = true;
+  audio.onended = function(){
+    audio.remove() //Remove when played.
+  };
+  document.body.appendChild(audio);
 }
 
 var create_translation_tr = function(text, option){
@@ -149,9 +164,12 @@ var create_translations_table = function(a){
   table.className = 'trans-table'; 
   var tbody = document.createElement('tbody');
   var translation_array = a[0][0];
+  var source_text = a[0][0][1];
   var phonetic_array = a[0][1];
-  var translation_types_array = a[1]; 
-  
+  var translation_types_array = a[1];   
+  var listen_button = document.createElement('span');
+  listen_button.className = 'listen-button';
+
   if (phonetic_array != undefined) {
     var phonetic = phonetic_array[3];
     var tr = document.createElement('tr');
@@ -161,11 +179,28 @@ var create_translations_table = function(a){
     td1.className = 'phonetic-td';       
     td2.className = '';
 
-    td1.innerText = phonetic ;
+    td1.appendChild(listen_button);
+    td1.appendChild(document.createTextNode(phonetic));
+
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tbody.appendChild(tr);
+  } else {
+    var tr = document.createElement('tr');
+    var td1 = document.createElement('td');
+    var td2 = document.createElement('td');
+
+    td1.appendChild(listen_button);
+
     tr.appendChild(td1);
     tr.appendChild(td2);
     tbody.appendChild(tr);
   }
+  
+
+  listen_button.addEventListener('click', function(e){
+    playSound(source_text, sl);
+  });
 
   if (translation_array != undefined) {
     var translation = translation_array[0];

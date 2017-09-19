@@ -121,7 +121,7 @@
 #SelectiveDictModal input{
   padding: 3px;
   display: inline;
-  padding: 4px;
+  padding: 8px;
   border: none !important;
   color: #393835;
   background: #e7efef !important;
@@ -152,6 +152,10 @@
 
 #SelectiveDictModal input, select{
   box-sizing: border-box;
+}
+
+#SelectiveDictModal label {
+  color: #a8b3bc;
 }
 
 .help-cursor{

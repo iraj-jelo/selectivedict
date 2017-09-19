@@ -280,7 +280,7 @@ var create_modal = function(element) {
   source_language_label.innerText = 'from';
   source_text_form.appendChild(source_language_label);
   source_text_form.appendChild(source_language_select);
-  var target_language_label = document.createElement('lebel');
+  var target_language_label = document.createElement('label');
   target_language_label.innerText = 'to';
   target_language_label.style.padding = '11px';
 

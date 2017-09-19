@@ -2,7 +2,7 @@
 
 var __version__ = 'v1.1.0';
 var text, sl, tl, enabled;
-
+var body_class_name = document.body.className;
 var default_source_language = "en";
 var default_target_language = "fa";
 
@@ -456,12 +456,12 @@ document.addEventListener('keyup', function(e) {
     // <alt> + <ctrl> + <doubleclick>
     if (enabled){
       enabled = false;
-      document.body.style.cursor = "";
+      document.body.className = body_class_name;
       document.body.removeEventListener('mouseup', mouseUpEvevntCallback);
       window.getSelection().removeAllRanges();
     } else {
       enabled = true;
-      document.body.style.cursor = 'help';
+      document.body.className = (body_class_name != '')?  body_class_name + ' ' + 'help-cursor' : 'help-cursor';
       document.body.addEventListener('mouseup', mouseUpEvevntCallback);
       window.getSelection().removeAllRanges();
     }

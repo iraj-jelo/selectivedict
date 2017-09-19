@@ -149,3 +149,6 @@
   box-sizing: border-box;
 }
 
+.help-cursor{
+  cursor: url(/icons/help.png), auto;
+}

@@ -87,7 +87,7 @@
 
 #SelectiveDictModal button {
   color: #FFFFFF;
-  background: #416dea;
+  background: #5d60dd;
   padding: 5px;
   padding-right: 8px;
   padding-left: 8px;
@@ -148,6 +148,22 @@
   -webkit-flex: 1;
   flex: 1;
   height: 37px;
+}
+
+#SelectiveDictModal input, select, textarea {
+  -webkit-box-shadow: inset rgba(0,0,0,0.2) 0 1px 3px 0,0 1px 0 rgba(255,255,255,0.2);
+  -moz-box-shadow: inset rgba(0,0,0,0.2) 0 1px 3px 0,0 1px 0 rgba(255,255,255,0.2);
+  box-shadow: inset rgba(0,0,0,0.2) 0 1px 3px 0,0 1px 0 rgba(255,255,255,0.2);
+  -webkit-transition: background,color 0.2s linear;
+  -moz-transition: background,color 0.2s linear;
+  -o-transition: background,color 0.2s linear;
+  transition: background,color 0.2s linear;
+  text-shadow: #fff 0 1px 0;
+  font-family: 'Open Sans', "Lucida Grande", Tahoma, Verdana, sans-serif;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 1.4;
+  -moz-appearance: none !important;
 }
 
 #SelectiveDictModal input, select{

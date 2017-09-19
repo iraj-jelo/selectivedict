@@ -335,13 +335,13 @@ var create_modal = function(element) {
   source_text_form.appendChild(text_input);
   var source_language_label = document.createElement('label');
 
-  source_language_label.style.padding = '11px';
+  source_language_label.style.padding = '9px';
   source_language_label.innerText = 'from';
   source_text_form.appendChild(source_language_label);
   source_text_form.appendChild(source_language_select);
   var target_language_label = document.createElement('label');
   target_language_label.innerText = 'to';
-  target_language_label.style.padding = '11px';
+  target_language_label.style.padding = '9px';
 
   source_text_form.appendChild(target_language_label);
   source_text_form.appendChild(target_language_select);

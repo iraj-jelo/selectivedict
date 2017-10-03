@@ -1,6 +1,10 @@
-.phonetic-td{
+.phonetic-td {
   color: #599bb3;
   line-height: 2;
+  background: #fff !important;
+  border-bottom: none !important;
+  vertical-align: middle;
+  padding: 0px !important;
 }
 
 .trans-type{
@@ -44,18 +48,13 @@
   width: auto !important;
 }
 
-.trans-table tr th td tr:nth-child(2n+1) tr:nth-child(2n) {
+.trans-table > tr, .trans-table > th, .trans-table > td, .trans-table > tr:nth-child(2n+1), .trans-table > tr:nth-child(2n),  .trans-type-td {
   background: #fff !important;
   border: none !important;
-  padding: 0 !important;
-  color: #777 !important;
-}
-
-.trans-table tr, td, th {
-  border: none;
   padding: 0px !important;
+  color: #777 !important;
+  border-bottom: none !important;
   vertical-align: middle;
-  background: #fff !important;
 }
 
 .trans-td, .translation-td {
@@ -64,6 +63,8 @@
   font:normal 14px arial,sans-serif;
   font-weight: 400;
   line-height: 15px;
+  padding: 0 !important;
+  border-bottom: none !important;
 }
 
 .synonyms-td, .source-text-td{
@@ -74,6 +75,8 @@
   font-weight: 400;
   line-height: 15px;
   padding-left: 15px !important;
+  border-bottom: none !important;
+  padding: 0 !important;
 }
 
 .button-green {
@@ -150,7 +153,7 @@
   height: 37px;
 }
 
-#SelectiveDictModal input, select, textarea {
+#SelectiveDictModal input select textarea {
   -webkit-box-shadow: inset rgba(0,0,0,0.2) 0 1px 3px 0,0 1px 0 rgba(255,255,255,0.2);
   -moz-box-shadow: inset rgba(0,0,0,0.2) 0 1px 3px 0,0 1px 0 rgba(255,255,255,0.2);
   box-shadow: inset rgba(0,0,0,0.2) 0 1px 3px 0,0 1px 0 rgba(255,255,255,0.2);
@@ -166,7 +169,7 @@
   -moz-appearance: none !important;
 }
 
-#SelectiveDictModal input, select{
+#SelectiveDictModal input select{
   box-sizing: border-box;
 }
 

@@ -178,7 +178,7 @@ var create_translations_table = function(a){
     var td2 = document.createElement('td');
 
     td1.className = 'phonetic-td';       
-    td2.className = '';
+    td2.className = 'phonetic-td';
 
     td1.appendChild(listen_button);
     td1.appendChild(document.createTextNode(phonetic));
@@ -191,6 +191,8 @@ var create_translations_table = function(a){
     var td1 = document.createElement('td');
     var td2 = document.createElement('td');
 
+    td1.className = 'phonetic-td';       
+    td2.className = 'phonetic-td';
     td1.appendChild(listen_button);
 
     tr.appendChild(td1);
@@ -225,7 +227,7 @@ var create_translations_table = function(a){
     var type = translation_type_array[0];
     var translations_array = translation_type_array[2];
      
-    var type_tr = create_translation_tr(type, {'divClassName': 'gt-baf-cell gt-baf-pos-head', 'spanClassName' : 'trans-type'});
+    var type_tr = create_translation_tr(type, {'divClassName': 'gt-baf-cell gt-baf-pos-head', 'spanClassName' : 'trans-type', 'tdClassName': 'trans-type-td'});
     tbody.appendChild(type_tr);
     
     for (var jndex  in translations_array ){

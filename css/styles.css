@@ -124,7 +124,7 @@
 #SelectiveDictModal input{
   padding: 3px;
   display: inline;
-  padding: 8px;
+  padding: 0 8px;
   border: none !important;
   color: #393835;
   background: #e7efef !important;

@@ -1,7 +1,7 @@
 // Author: iraj jelodari <iraj.jelo@gmail.com>
 
-var __version__ = 'v1.2.1';
-var text, sl, tl, enabled;
+var text, sl, tl;
+var translation = false;
 var default_source_language = "en";
 var default_target_language = "fa";
 
@@ -526,19 +526,34 @@ var mouseUpEvevntCallback = function(e){
     }
 }
 
-document.addEventListener('keyup', function(e) { 
+var keyUpCallback = function(e) {
   if (e.altKey && e.ctrlKey && (e.keyCode == 84)) {
-    // <alt> + <ctrl> + <doubleclick>
-    if (enabled){
-      enabled = false;
-      document.body.className = document.body.className.replace(new RegExp('help-cursor', 'g'), '').trim();
-      document.body.removeEventListener('mouseup', mouseUpEvevntCallback);
-      window.getSelection().removeAllRanges();
-    } else {
-      enabled = true;
-      document.body.className = (document.body.className != '')?  document.body.className + ' ' + 'help-cursor' : 'help-cursor';
-      document.body.addEventListener('mouseup', mouseUpEvevntCallback);
-      window.getSelection().removeAllRanges();
-    }
+    browser.runtime.sendMessage({translation: translation});
   } 
-}, false);
+}
+
+document.addEventListener('keyup', keyUpCallback, false);
+
+var enable = function() {
+  translation = true;
+  document.body.className = (document.body.className != '')?  document.body.className + ' ' + 'help-cursor' : 'help-cursor';
+  document.body.addEventListener('mouseup', mouseUpEvevntCallback);
+  window.getSelection().removeAllRanges();
+}
+
+var disable = function() {
+  translation = false;
+  document.body.className = document.body.className.replace(new RegExp('help-cursor', 'g'), '').trim();
+  document.body.removeEventListener('mouseup', mouseUpEvevntCallback);
+  window.getSelection().removeAllRanges();
+}
+
+browser.runtime.onMessage.addListener(request => {
+  // if request.translation was true and translation was false, do translate
+  if (request.translation && !translation) enable();
+  // if request.translation was false and translation was true, dont translate 
+  if (!request.translation && translation) disable();
+
+  options = request.options;
+  return Promise.resolve({response: "Hi from content script"});
+});

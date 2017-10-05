@@ -7,12 +7,12 @@
   padding: 0px !important;
 }
 
-.trans-type{
+.trans-type {
   color: #599bb3;
   line-height: 3;
 }
 
-.trans-modal{
+.trans-modal {
  -webkit-user-select: none !important;
 }
 
@@ -29,7 +29,7 @@
   overflow: auto;
 }
 
-.trans-modal-backdrop{
+.trans-modal-backdrop {
   z-index:9999;
   background: #000;
   opacity: .5;
@@ -67,7 +67,7 @@
   border-bottom: none !important;
 }
 
-.synonyms-td, .source-text-td{
+.synonyms-td, .source-text-td {
   color: #777;
   cursor: pointer;
   unicode-bidi: inherit;
@@ -121,7 +121,7 @@
   outline-offset: 2px !important;
 }
 
-#SelectiveDictModal input{
+#SelectiveDictModal input {
   padding: 3px;
   display: inline;
   padding: 0 8px;
@@ -169,7 +169,7 @@
   -moz-appearance: none !important;
 }
 
-#SelectiveDictModal input select{
+#SelectiveDictModal input select {
   box-sizing: border-box;
 }
 
@@ -177,7 +177,7 @@
   color: #a8b3bc;
 }
 
-.help-cursor{
+.help-cursor {
   cursor: url(/icons/help.png), auto;
 }
 

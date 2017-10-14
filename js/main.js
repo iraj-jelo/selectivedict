@@ -132,14 +132,26 @@ var request = function(text, sl, tl, callback) {
 
 var playSound = function(text, tl) {
   var url = 'http://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=32&client=gtx&q=' + text + '&tl=' + tl;
-  var audio = document.createElement('audio');
-  audio.style.display = "none";
-  audio.src = url;
-  audio.autoplay = true;
-  audio.onended = function(){
-    audio.remove() //Remove when played.
+  var xhttp = new XMLHttpRequest();
+  
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var audio = document.createElement('audio');
+      audio.style.display = "none";
+      audio.src = window.URL.createObjectURL(this.response);;
+      audio.autoplay = true;
+      audio.onended = function(){
+        audio.remove() //Remove when played.
+      };
+      document.body.appendChild(audio);
+
+    }
   };
-  document.body.appendChild(audio);
+
+  xhttp.open("GET", url, false);
+  xhttp.responseType = 'blob';
+  xhttp.setRequestHeader('Referer', '')
+  xhttp.send();
 }
 
 var create_translation_tr = function(text, option){

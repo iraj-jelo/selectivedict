@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "SelectiveDict",
   "version": "3.0.0",
-  "author": "itaj jelodari <iraj.jelo@gmail.com>",
+  "author": "Iraj Jelodari <iraj.jelo@gmail.com>",
   "description": "a dictionary that enables you to translate selected texts on the web pages with only one click by google translator. please see the github page to contribute",
   "homepage_url": "https://github.com/iraj-jelo/selectivedict",
 
@@ -16,14 +16,14 @@
     {
       "matches": ["<all_urls>"],
       "css": ["css/styles.css"],
-      "js": ["js/main.js"]
+      "js": ["selective_dict.js"]
     }
   ],
 
   "permissions": ["activeTab", "tabs", "storage", "<all_urls>", "webRequest", "webRequestBlocking", "https://translate.google.com/*"],
 
   "developer": {
-    "name": "iraj jelodari",
+    "name": "Iraj Jelodari",
     "url": "https://github.com/iraj-jelo/"
   },
 

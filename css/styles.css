@@ -1,3 +1,7 @@
+:root {
+  --font: 15px/22px arial,sans-serif;
+}
+    
 .phonetic-td {
   color: #599bb3;
   line-height: 2;
@@ -5,21 +9,18 @@
   border-bottom: none !important;
   vertical-align: middle;
   padding: 0px !important;
+  border: none !important;
 }
 
-.trans-type {
+.trans-type, .definitions-type {
   color: #599bb3;
   line-height: 3;
-}
-
-.trans-modal {
- -webkit-user-select: none !important;
 }
 
 .modal-guts {
   /* cover the modal */
   position: absolute;
-  top: 57px;
+  top: 60px;
   left: 0;
   width: 100%;
   height: 72%;
@@ -30,7 +31,7 @@
 }
 
 .trans-modal-backdrop {
-  z-index:9999;
+  z-index:9999999998;
   background: #000;
   opacity: .5;
   position: fixed;
@@ -41,11 +42,13 @@
 }
 
 .trans-table{
-  margin: 15px !important;
+  margin: 0px !important;
   margin-top: 0px !important;
   border: none !important;
   table-layout: fixed !important;
   width: auto !important;
+  box-shadow: none !important;
+  order: 2
 }
 
 .trans-table > tr, .trans-table > th, .trans-table > td, .trans-table > tr:nth-child(2n+1), .trans-table > tr:nth-child(2n),  .trans-type-td {
@@ -57,49 +60,67 @@
   vertical-align: middle;
 }
 
+.trans-table tr {
+  border: none !important;
+  padding: 0px !important;
+  background-color: #fff !important;
+}
+
+.trans-table tr:nth-child(2n), .trans-table tr:nth-child(2n+1) {
+  background: #fff !important;
+}
+
 .trans-td, .translation-td {
   color: #111;
   unicode-bidi: inherit;
   font:normal 14px arial,sans-serif;
   font-weight: 400;
+  font-size: 16px;
   line-height: 15px;
-  padding: 0 !important;
+  padding: 3px 12px 3px 0 !important;
   border-bottom: none !important;
+  border: none !important;
 }
 
-.synonyms-td, .source-text-td {
+.synonyms-td, .source-text-td, .definition-sample {
   color: #777;
   cursor: pointer;
   unicode-bidi: inherit;
   font:normal 13px arial,sans-serif;
   font-weight: 400;
+  font-size: 14px;
   line-height: 15px;
   padding-left: 15px !important;
   border-bottom: none !important;
   padding: 0 !important;
+  border: none !important;
 }
 
-.button-green {
-  color: #FFFFFF;
-  background: #3dd28d;
+.selective-dict-modal-top-bar {
+	display: flex;
+	box-shadow: 0 0 3px;
+	padding: 8px;
 }
 
-#SelectiveDictModal {
+.selective-dict-modal {
   font: normal 13px arial,sans-serif;
+  border-radius: 6px;
 }
 
-#SelectiveDictModal button {
+.selective-dict-modal button {
   color: #FFFFFF;
-  background: #5d60dd;
+  background: #4285f4;
   padding: 5px;
   padding-right: 8px;
   padding-left: 8px;
   border: none !important;
   height:37px;
   line-height: 2;
+  min-width: 90px;
+  font-weight: normal !important;
 }
 
-#SelectiveDictModal button, [type="button"], [type="reset"], [type="submit"], .button {
+.selective-dict-modal button, [type="button"], [type="reset"], [type="submit"], .button {
   -webkit-appearance: none;
   -moz-appearance: none;
   display: inline-block;
@@ -114,38 +135,41 @@
   -ms-user-select: none;
   vertical-align: middle;
   white-space: nowrap;
+  cursor: pointer;
 }
 
-#SelectiveDictModal button:focus, [type="button"]:focus, [type="reset"]:focus, [type="submit"]:focus, .button:focus {
-  outline: 3px solid rgba(2, 145, 153, 0.36) !important;
-  outline-offset: 2px !important;
+.selective-dict-modal button:focus, [type="button"]:focus, [type="reset"]:focus, [type="submit"]:focus, .button:focus {
+  outline: none !important;
+  outline-offset: none !important;
 }
 
-#SelectiveDictModal input {
-  padding: 3px;
-  display: inline;
-  padding: 0 8px;
-  border: none !important;
-  color: #393835;
-  background: #e7efef !important;
-  font-size: 14px;
-  border-radius: 0px;
-  width: 100px;
-  flex: 2;
-  height: 37px;
+.selective-dict-modal input {
+	padding: 3px;
+	display: inline;
+	padding: 0 8px;
+	border: 1px solid #aebde1 !important;
+	/* color: #0d46f0; */
+	background: #fff !important;
+	font-size: 14px;
+	width: 100px;
+	flex: 2;
+	height: 37px;
   margin: 0;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
 }
 
-#SelectiveDictModal input:focus, select:focus {
-  border-color: #188fff;
+.selective-dict-modal input:focus, select:focus {
+  border-color: #0083ff !important;
+  box-shadow: 0 0 5px #04698861 !important;
 }
 
-#SelectiveDictModal select {
+.selective-dict-modal select {
   padding: 3px;
   display: inline;
   padding: 4px;
-  background: #e7efef;
-  border: none !important;
+  background: #fff;
+	border: 1px solid #aebde1 !important;
   color: #393835;
   font-size: 14px;
   -webkit-flex: 1;
@@ -153,35 +177,20 @@
   height: 37px;
 }
 
-#SelectiveDictModal input select textarea {
-  -webkit-box-shadow: inset rgba(0,0,0,0.2) 0 1px 3px 0,0 1px 0 rgba(255,255,255,0.2);
-  -moz-box-shadow: inset rgba(0,0,0,0.2) 0 1px 3px 0,0 1px 0 rgba(255,255,255,0.2);
-  box-shadow: inset rgba(0,0,0,0.2) 0 1px 3px 0,0 1px 0 rgba(255,255,255,0.2);
-  -webkit-transition: background,color 0.2s linear;
-  -moz-transition: background,color 0.2s linear;
-  -o-transition: background,color 0.2s linear;
-  transition: background,color 0.2s linear;
-  text-shadow: #fff 0 1px 0;
-  font-family: 'Open Sans', "Lucida Grande", Tahoma, Verdana, sans-serif;
-  font-weight: 300;
-  letter-spacing: 0;
-  line-height: 1.4;
-  -moz-appearance: none !important;
-}
-
-#SelectiveDictModal input select {
+.selective-dict-modal input select {
   box-sizing: border-box;
+  font-weight: normal !important;
 }
 
-#SelectiveDictModal label {
-  color: #a8b3bc;
+.selective-dict-modal label {
+  color: #777;
 }
 
 .help-cursor {
   cursor: url(/icons/help.png), auto;
 }
 
-#SelectiveDictModal .listen-button {
+.selective-dict-modal .listen-button {
   border-top:1px solid #e5e5e5;
   border-bottom:1px solid #ebebeb;
   outline:0;
@@ -192,7 +201,7 @@
   -moz-opacity: 0.55;
 }
 
-#SelectiveDictModal .listen-button {
+.selective-dict-modal .listen-button {
   -webkit-border-radius:2px;
   -moz-border-radius:2px;
   border-radius:2px;
@@ -215,17 +224,17 @@
   cursor:default
 }
 
-#SelectiveDictModal .listen-button:hover, .listen-button:active, .listen-button:checked, .listen-button:selected {
+.selective-dict-modal .listen-button:hover, .listen-button:active, .listen-button:checked, .listen-button:selected {
   color:#222;
   padding:0
 }
 
-#SelectiveDictModal .listen-button:hover {
+.selective-dict-modal .listen-button:hover {
   border-color:#c6c6c6!important;
   color:#222
 }
 
-#SelectiveDictModal .listen-button:hover {
+.selective-dict-modal .listen-button:hover {
   -webkit-box-shadow:0 1px 1px rgba(0,0,0,.1);
   -moz-box-shadow:0 1px 1px rgba(0,0,0,.1);
   box-shadow:0 1px 1px rgba(0,0,0,.1);
@@ -233,27 +242,27 @@
   -moz-opacity: 1;
 }
 
-#SelectiveDictModal .listen-button:active {
+.selective-dict-modal .listen-button:active {
   -webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
   -moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
   box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
   border-color:#c6c6c6
 }
 
-#SelectiveDictModal .listen-button:selected, .listen-button:checked {
+.selective-dict-modal .listen-button:selected, .listen-button:checked {
   -webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
   -moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
   box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
   border-color:#ccc
 }
 
-#SelectiveDictModal .listen-button:disabled, .listen-button:disabled {
+.selective-dict-modal .listen-button:disabled, .listen-button:disabled {
   color:#222!important;
   opacity:0.3;
   filter:alpha(opacity=30)
 }
 
-#SelectiveDictModal .listen-button {
+.selective-dict-modal .listen-button {
   background: url('/icons/Icons8_flat_speaker.svg') no-repeat;
   height: 21px;
   width: 21px;
@@ -266,3 +275,153 @@
   text-decoration: underline;
 }
 
+
+#transCloseButton {
+  background: rgb(223, 223, 223) none repeat scroll 0% 0%;
+  color: rgb(60, 60, 60);
+  bottom: 12px;
+  position: absolute;
+  font-weight: bolder;
+  border: 1px solid #c4c4c4 !important;
+  outline: none !important;
+}
+
+#transCloseButton:focus {
+  outline: none !important;
+}
+
+#transCloseButton:hover {
+  background: rgb(200, 199, 199) none repeat scroll 0% 0%
+}
+.translation-button:hover {
+  background: #5e9cff none repeat scroll 0% 0%
+}
+
+.selective-dict-spinner {
+	border: 10px solid #fffacf;
+	border-top: 10px solid #2957b0;
+	border-radius: 50%;
+	width: 64px;
+	height: 64px;
+	animation: spin 2s linear infinite;
+	position: fixed;
+	z-index: 9999999999999999;
+	top: calc(50% - 32px);
+	left: calc(50% - 32px);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.sd-examples-container {
+  width: 500px;
+}
+
+.sd-examples-title {
+  margin-top: 15px;
+  font-weight: normal !important;
+  color: #777;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.sd-example b {
+  font-weight: bolder;
+  color: #0c0c0d;
+}
+
+.sd-example {
+  padding: 10px 15px !important;
+  margin: 0 !important;
+  color: inherit !important;
+  font-weight: normal !important;
+  display: none;
+  opacity: 0;
+  border: none !important;
+  background-color: #fff !important;
+  background: none !important;
+  font-size: inherit !important;
+  transition: opacity 5.3s ease-out;
+}
+
+.sd-example-icon:before {
+    content: "";
+    margin-right: 20px;
+    background: url('../icons/iconfinder_right_quote_118611.svg');
+    height: 10px;
+    width: 20px;
+    display: inline-block;
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+.translations-row, .translations, .definition, .definition-text {
+  display: flex;
+}
+
+
+.translations-container {
+  padding-left: 15px;
+}
+
+.trans-table, .definitions-container {
+  flex: 50;
+  min-width: 50%;
+}
+
+.definition-icon {
+  color: rgba(0,0,0,0.38) !important;
+	width: 18px;
+  height: 18px;
+  display: flex;
+  float: left;
+  text-align: center;
+  font-size: 14px;
+  flex-direction: column;
+  border: 1px solid rgba(0,0,0,0.38);
+  border-radius: 50%;
+}
+
+.definition-text {
+  width: 85%;
+  margin-left: 22px;
+  font-size: 16px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.definitions-type {
+  margin-left: 0px;
+}
+ 
+.definition-sample {
+	width: 85%;
+	margin-left: 44px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: normal;
+}
+.sd-update-tip {
+  position: absolute;
+  padding: 10px;
+  background: #f7dd51;
+  bottom: 55px;
+  display: none;
+  right: 10px;
+  z-index: 99999999999999999;
+}
+.sd-update-icon {
+	position: absolute;
+	height: 32px;
+	width: 32px;
+	background: #f7dd51;
+	right: 15px;
+	bottom: 15px;
+	border-radius: 50%;
+	background-image: url('../icons/iconfinder_ic_update_48px_3669185.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	cursor: pointer;
+}

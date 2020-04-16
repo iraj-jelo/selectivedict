@@ -105,6 +105,7 @@
 .selective-dict-modal {
   font: normal 13px arial,sans-serif;
   border-radius: 6px;
+  transition: 'top 1s, opacity .5s ease-out';
 }
 
 .selective-dict-modal button {

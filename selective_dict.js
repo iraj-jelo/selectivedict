@@ -679,8 +679,10 @@ var create_modal = function (element) {
     };
 
     if (has_update) {
-        let update_icon =  document.createElement('div');
+        let update_icon =  document.createElement('a');
         update_icon.className = "sd-update-icon";
+        update_icon.href = "https://addons.mozilla.org/addon/selectivedict/";
+        update_icon.target = "_blank";
         selective_dict_modal_container.appendChild(update_icon)
 
         let update_tip =  document.createElement('div');

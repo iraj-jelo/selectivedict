@@ -8,6 +8,7 @@ var browser_action_on_icons = {16: "icons/16.png", 32: "icons/32.png"};
 var browser_action_off_icons = {16: "icons/16-off.png", 32: "icons/32-off.png"};
 
 browser.storage.onChanged.addListener((result)=>{
+    is_translating = result.is_translating.newValue;
     if (result.is_translating.newValue == true) {
         browser.browserAction.setIcon({path: browser_action_on_icons});    
     } else {

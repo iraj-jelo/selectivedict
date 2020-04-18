@@ -129,6 +129,7 @@ var request = function (text, sl, tl, callback) {
     var xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = callback;
+    xhttp.timeout = 2000;
     xhttp.open("GET", url, false);
 
     return xhttp
@@ -464,13 +465,13 @@ function display_translations(data) {
     container = document.createElement('div');
     container.className = "translations-container"
     container.appendChild(create_phonetic_table(data))
-    
+
     row = document.createElement('div');
     row.className = "translations-row"
     row.appendChild(create_translations_table(data))
 
     container.appendChild(row)
-    
+
     let definitions = create_definitions(data)
 
     if (definitions) {
@@ -837,10 +838,12 @@ function check_for_update() {
 }
 
 browser.storage.onChanged.addListener((result) => {
-    if (result.is_translating.newValue == true) {
-        check_for_update()
-        enable()
-    } else {
-        disable();
+    if (result.is_translating != undefined) {
+        if (result.is_translating.newValue == true) {
+            check_for_update()
+            enable()
+        } else {
+            disable();
+        }
     }
 })

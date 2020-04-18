@@ -821,7 +821,8 @@ function check_for_update() {
     let current_version = browser.runtime.getManifest().version;
     let url = 'https://raw.githubusercontent.com/iraj-jelo/selectivedict/master/manifest.json'
 
-    var xhttp = new XMLHttpRequest();
+    var xhttp = new XMLHttpRequest(); 
+    xhttp.timeout = 2000
 
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -833,15 +834,16 @@ function check_for_update() {
             }
         }
     };
-    xhttp.open("GET", url, false);
+
+    xhttp.open("GET", url, true);
     xhttp.send();
 }
 
 browser.storage.onChanged.addListener((result) => {
     if (result.is_translating != undefined) {
         if (result.is_translating.newValue == true) {
-            check_for_update()
-            enable()
+            check_for_update();
+            enable();
         } else {
             disable();
         }

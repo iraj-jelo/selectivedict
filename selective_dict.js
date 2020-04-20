@@ -543,8 +543,11 @@ var create_modal = function (element) {
     source_language_label.style.padding = '9px';
     source_language_label.visibility = 'visible !important';
     source_language_label.innerText = 'from';
+    var swap_languages = document.createElement('div');
+    swap_languages.className = "swap-languages"
     selective_dict_modal_top_bar.appendChild(source_language_label);
     selective_dict_modal_top_bar.appendChild(source_language_select);
+    selective_dict_modal_top_bar.appendChild(swap_languages);
     var target_language_label = document.createElement('label');
     target_language_label.innerText = 'to';
     target_language_label.visibility = 'visible !important';
@@ -555,6 +558,8 @@ var create_modal = function (element) {
 
     selective_dict_modal_top_bar.appendChild(translate_button);
 
+
+    swap_languages.addEventListener('click', swap_languages_callback);
 
     function handle_keydowns(e) {
         // scroll up
@@ -575,6 +580,21 @@ var create_modal = function (element) {
     }
 
     document.addEventListener('keydown', handle_keydowns)
+
+
+    function swap_languages_callback() {
+        var temporarySelectedIndex = source_language_select.selectedIndex;
+        source_language_select.selectedIndex = target_language_select.selectedIndex;
+        target_language_select.selectedIndex = temporarySelectedIndex;
+
+        var sl_select = [source_language_select.selectedOptions[0].innerHTML, source_language_select.selectedIndex];
+        var tl_select = [target_language_select.selectedOptions[0].innerHTML, target_language_select.selectedIndex];
+
+        browser.storage.local.set({
+            translateFromSelect: sl_select,
+            translateToSelect: tl_select
+        });
+    }
 
     function saveOptions() {
         var sl_select = [source_language_select.selectedOptions[0].innerHTML, source_language_select.selectedIndex];

@@ -426,3 +426,20 @@
 	background-size: contain;
 	cursor: pointer;
 }
+.swap-languages {
+	width: 32px;
+	background: #fff;
+	right: 15px;
+	bottom: 15px;
+	background-image: url('../icons/arrow.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	cursor: pointer;
+	margin-left: 9px;
+  background-position: center;
+}
+.swap-languages:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+  border-radius: 50%;
+}
